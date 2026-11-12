@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Secure Notes</title>
+</head>
+<body>
+  <h1>Secure Notes</h1>
+  <p id="msg"></p>
+
+  <section id="auth">
+    <h2>Login / Register</h2>
+    <input id="name" placeholder="Name (register only)" />
+    <input id="email" placeholder="Email" />
+    <input id="password" type="password" placeholder="Password" />
+    <input id="interests" placeholder="Interests, comma separated (register only)" />
+    <button id="loginBtn">Login</button>
+    <button id="registerBtn">Register</button>
+  </section>
+
+  <section id="app" hidden>
+    <p>Logged in as <b id="who"></b> <button id="logoutBtn">Logout</button></p>
+
+    <h2>My Notes</h2>
+    <input id="noteTitle" placeholder="Title" />
+    <input id="noteContent" placeholder="Content" />
+    <button id="addNote">Add Note</button>
+    <ul id="notes"></ul>
+    <button id="prev">Prev</button>
+    <span id="pageInfo"></span>
+    <button id="next">Next</button>
+
+    <h2>Posts (public)</h2>
+    <input id="postTitle" placeholder="Post title" />
+    <input id="postBody" placeholder="Post body" />
+    <button id="addPost">Add Post</button>
+    <pre id="postsOut"></pre>
+
+    <section id="admin" hidden>
+      <h2>Admin: Add User</h2>
+      <input id="auName" placeholder="Name" />
+      <input id="auEmail" placeholder="Email" />
+      <input id="auPassword" type="password" placeholder="Password" />
+      <select id="auRole"><option>user</option><option>admin</option></select>
+      <button id="addUser">Add User</button>
+
+      <h2>Admin: Users</h2>
+      <ul id="users"></ul>
+
+      <h2>Admin: All Notes</h2>
+      <ul id="allNotes"></ul>
+
+      <h2>Admin: Users grouped by interests</h2>
+      <pre id="groups"></pre>
+    </section>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
