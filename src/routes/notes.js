@@ -19,6 +19,7 @@ router.post("/", async (req, res) => {
         const note = await Note.create({ title, content, owner: req.user._id });
         res.status(201).json({ note });
     } catch (err) {
+        console.error("ERROR:", err);
         res.status(500).json({ message: "Server error" });
     }
 });
