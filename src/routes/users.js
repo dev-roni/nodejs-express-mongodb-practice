@@ -37,6 +37,33 @@ router.get("/", async (req, res) => {
     }
 });
 
+// GET /api/users/grouped/interests: Scenario 2... না, Scenario 1: interest অনুযায়ী users
+// একটাই User.aggregate() call, আর কোনো find/count নেই
+router.get("/grouped/interests", async (req, res) => {
+    try {
+        const { page, limit, skip } = getPagination(req.query);
+
+        const groups = await User.aggregate([
+            { $unwind: "$interests" },
+            {
+                $group: {
+                    _id: "$interests",
+                    count: { $sum: 1 },
+                    users: { $push: { _id: "$_id", name: "$name", email: "$email" } },
+                },
+            },
+            { $sort: { count: -1, _id: 1 } },
+            { $skip: skip },
+            { $limit: limit },
+            { $project: { _id: 0, interest: "$_id", count: 1, users: 1 } },
+        ]);
+
+        res.json({ page, limit, data: groups });
+    } catch (err) {
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
 // GET /api/users/:id: একজন user (index: _id)
 router.get("/:id", checkId, async (req, res) => {
     try {
